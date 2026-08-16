@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-canvas: #FFFFFF;
+  --color-canvas-alt: #ECE9E6;
+  --color-canvas-dark: #2B2926;
+  --color-surface: #FFFFFF;
+  --color-surface-dark: #4A4743;
+  --color-grease: #ECE9E6;
+  --color-ink: #4A4743;
+  --color-mute: #7D7873;
+  --color-mute-dark: #D6D2CD;
+  --color-line: #D6D2CD;
+  --color-line-dark: #5E5A55;
+  --color-accent: #D95148;
+  --color-accent-hover: #C83D36;
+  --font-sans: var(--font-space-grotesk);
+}
+
+html {
+  min-width: 0;
+  max-width: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  scrollbar-gutter: stable;
+}
+
+body {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Keep content in the viewport when a long URL, label, or grid item is encountered. */
+main,
+section,
+header,
+footer,
+nav,
+article,
+aside,
+form,
+[role="dialog"] {
+  min-width: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+a,
+button,
+label,
+summary {
+  overflow-wrap: anywhere;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
+input,
+select,
+textarea {
+  font-size: 1rem;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+
+@media (min-width: 768px) {
+  .split-panel {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .split-panel-media::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+  }
+
+  .split-panel--canvas .split-panel-media::after {
+    background: linear-gradient(to right, var(--color-canvas) 0%, color-mix(in srgb, var(--color-canvas) 86%, transparent) 42%, transparent 70%);
+  }
+
+  .split-panel--canvas-alt .split-panel-media::after {
+    background: linear-gradient(to right, var(--color-canvas-alt) 0%, color-mix(in srgb, var(--color-canvas-alt) 86%, transparent) 42%, transparent 70%);
+  }
+}
+
+@keyframes splash-line {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  50.01% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+@layer components {
+  .micro-label {
+    @apply text-[11px] font-medium uppercase tracking-[0.22em];
+  }
+
+  .btn-solid-dark {
+    @apply inline-flex min-h-12 max-w-full items-center justify-center gap-3 whitespace-normal border border-accent-hover bg-accent-hover px-7 py-3.5 text-center text-[12px] font-medium uppercase tracking-[0.18em] text-white transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] hover:border-[#A9322C] hover:bg-[#A9322C] active:translate-y-px disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-line-dark {
+    @apply inline-flex min-h-12 max-w-full items-center justify-center gap-3 whitespace-normal border border-grease/40 px-7 py-3.5 text-center text-[12px] font-medium uppercase tracking-[0.18em] text-grease transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] hover:border-grease hover:bg-grease hover:text-canvas-dark active:translate-y-px disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-solid-light {
+    @apply inline-flex min-h-12 max-w-full items-center justify-center gap-3 whitespace-normal border border-accent-hover bg-accent-hover px-7 py-3.5 text-center text-[12px] font-medium uppercase tracking-[0.18em] text-white transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] hover:border-[#A9322C] hover:bg-[#A9322C] active:translate-y-px disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-line-light {
+    @apply inline-flex min-h-12 max-w-full items-center justify-center gap-3 whitespace-normal border border-ink/25 px-7 py-3.5 text-center text-[12px] font-medium uppercase tracking-[0.18em] text-ink transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] hover:border-ink hover:bg-ink hover:text-white active:translate-y-px disabled:pointer-events-none disabled:opacity-50;
+  }
+}
+
+@media (max-width: 399px) {
+  .micro-label {
+    letter-spacing: 0.16em;
+  }
+
+  .btn-solid-dark,
+  .btn-line-dark,
+  .btn-solid-light,
+  .btn-line-light {
+    padding-inline: 1rem;
+    letter-spacing: 0.11em;
+  }
+}
