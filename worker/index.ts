@@ -32,13 +32,20 @@ async function handleLead(request: Request): Promise<Response> {
     const scriptResponse = await fetch(GOOGLE_APPS_SCRIPT_ENDPOINT, {
       method: "POST",
       body: JSON.stringify(payload),
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     });
-    const result = (await scriptResponse.json().catch(() => null)) as { error?: string; ok?: boolean } | null;
+    const isJson = scriptResponse.headers.get("content-type")?.includes("application/json");
+    const result = (isJson ? await scriptResponse.json().catch(() => null) : null) as {
+      error?: string;
+      ok?: boolean;
+    } | null;
 
     if (!scriptResponse.ok || !result?.ok) {
       return Response.json(
-        { error: result?.error || "The quotation request could not be saved." },
+        { error: result?.error || "The quotation service returned an unexpected response." },
         { status: 502 },
       );
     }
