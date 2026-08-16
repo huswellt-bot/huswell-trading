@@ -67,13 +67,24 @@ export default function ContactSection() {
     };
 
     try {
-      const response = await fetch("/api/leads", {
+      const response = await fetch(`/api/leads?request=${encodeURIComponent(payload.leadId)}`, {
         method: "POST",
         body: JSON.stringify(payload),
-        headers: { "Content-Type": "application/json" },
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
       });
-      const result = (await response.json()) as { error?: string };
-      if (!response.ok) throw new Error(result.error || "Unable to save your inquiry.");
+      const isJson = response.headers.get("content-type")?.includes("application/json");
+      const result = (isJson ? await response.json().catch(() => null) : null) as {
+        error?: string;
+        ok?: boolean;
+      } | null;
+
+      if (!response.ok || !result?.ok) {
+        throw new Error(result?.error || "The quotation service returned an unexpected response.");
+      }
 
       setStatus("sent");
       form.reset();
