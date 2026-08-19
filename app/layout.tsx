@@ -4,7 +4,14 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import ChatButtons from "@/components/chat-buttons";
 import SplashLoader from "@/components/splash-loader";
-import { businessSchema, SITE_URL } from "@/lib/seo";
+import {
+  businessSchema,
+  DEFAULT_SOCIAL_IMAGE,
+  DEFAULT_SOCIAL_IMAGE_ALT,
+  DEFAULT_SOCIAL_IMAGE_HEIGHT,
+  DEFAULT_SOCIAL_IMAGE_WIDTH,
+  SITE_URL,
+} from "@/lib/seo";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -45,10 +52,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/img/hero/hero.jpg",
-        width: 1600,
-        height: 900,
-        alt: "Custom packaging by Huswell Trading",
+        url: DEFAULT_SOCIAL_IMAGE,
+        width: DEFAULT_SOCIAL_IMAGE_WIDTH,
+        height: DEFAULT_SOCIAL_IMAGE_HEIGHT,
+        alt: DEFAULT_SOCIAL_IMAGE_ALT,
       },
     ],
   },
@@ -57,7 +64,7 @@ export const metadata: Metadata = {
     title: "Custom Packaging Supplier in the Philippines | Huswell Trading",
     description:
       "Custom boxes, PR kits, printed packaging, corporate gift boxes, and corrugated solutions for brands across the Philippines.",
-    images: ["/assets/img/hero/hero.jpg"],
+    images: [DEFAULT_SOCIAL_IMAGE],
   },
 };
 

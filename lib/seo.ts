@@ -3,7 +3,11 @@ import { CONTACT } from "@/lib/site-data";
 
 export const SITE_URL = "https://www.huswelltrading.com";
 
-const DEFAULT_IMAGE = "/assets/img/hero/hero.jpg";
+export const DEFAULT_SOCIAL_IMAGE = "/hero/huswell-hero.jpg";
+export const DEFAULT_SOCIAL_IMAGE_WIDTH = 1448;
+export const DEFAULT_SOCIAL_IMAGE_HEIGHT = 1086;
+export const DEFAULT_SOCIAL_IMAGE_ALT =
+  "Philippine-themed custom presentation boxes made by Huswell Trading";
 
 export function createPageMetadata({
   title,
@@ -30,10 +34,10 @@ export function createPageMetadata({
       siteName: "Huswell Trading",
       images: [
         {
-          url: DEFAULT_IMAGE,
-          width: 1600,
-          height: 900,
-          alt: "Custom packaging by Huswell Trading",
+          url: DEFAULT_SOCIAL_IMAGE,
+          width: DEFAULT_SOCIAL_IMAGE_WIDTH,
+          height: DEFAULT_SOCIAL_IMAGE_HEIGHT,
+          alt: DEFAULT_SOCIAL_IMAGE_ALT,
         },
       ],
     },
@@ -41,7 +45,7 @@ export function createPageMetadata({
       card: "summary_large_image",
       title: socialTitle,
       description,
-      images: [DEFAULT_IMAGE],
+      images: [DEFAULT_SOCIAL_IMAGE],
     },
   };
 }
@@ -54,7 +58,7 @@ export const businessSchema = {
     "Custom packaging supplier in the Philippines for rigid boxes, PR kits, printed packaging, corrugated boxes, corporate gift boxes, and paper fillers.",
   url: SITE_URL,
   logo: `${SITE_URL}/logo/huswell-logo.png`,
-  image: `${SITE_URL}${DEFAULT_IMAGE}`,
+  image: `${SITE_URL}${DEFAULT_SOCIAL_IMAGE}`,
   foundingDate: "2015",
   email: CONTACT.email,
   telephone: CONTACT.phone,
